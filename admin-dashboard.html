@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة المشرف</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1 class="animated-title">لوحة تحكم المشرف</h1>
+<input type="text" id="new-student-name" placeholder="اكتب اسم الطالب"><br>
+<select id="new-student-stream">
+<option value="science">علمي علوم</option>
+<option value="math">علمي رياضة</option>
+</select><br>
+<input type="number" id="new-code-duration" placeholder="مدة الصلاحية بالساعات"><br>
+<button onclick="generateNewCode()">توليد كود جديد</button>
+<table id="codes-table">
+<thead><tr><th>اسم الطالب</th><th>الكود</th><th>التخصص</th><th>انتهاء الصلاحية</th><th>الحالة</th></tr></thead>
+<tbody id="codes-table-body"></tbody>
+</table>
+<div id="star-container"></div>
+</div>
+
+<script>
+let generatedCodesList=[];
+function generateNewCode(){
+  const name=document.getElementById('new-student-name').value;
+  const stream=document.getElementById('new-student-stream').value;
+  const hours=parseInt(document.getElementById('new-code-duration').value||1);
+  if(!name){alert('⚠️ اكتب اسم الطالب');return;}
+  const code=Math.floor(100000+Math.random()*900000).toString();
+  const expiry=Date.now()+hours*60*60*1000;
+  generatedCodesList.push({name,code,stream,expiryTimestamp:expiry});
+  renderAdminTable();
+  alert('تم إنشاء الكود: '+code);
+  document.getElementById('new-student-name').value='';
+}
+function renderAdminTable(){
+  const tbody=document.getElementById('codes-table-body');
+  tbody.innerHTML='';
+  const now=Date.now();
+  generatedCodesList.forEach(s=>{
+    const status=now>s.expiryTimestamp?'منتهي':'نشط';
+    tbody.innerHTML+=`<tr><td>${s.name}</td><td>${s.code}</td><td>${s.stream}</td><td>${new Date(s.expiryTimestamp).toLocaleString()}</td><td>${status}</td></tr>`;
+  });
+}
+</script>
+</body>
+</html>

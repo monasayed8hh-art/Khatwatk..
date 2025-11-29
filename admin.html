@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خطوتك - مشرف</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1 class="animated-title">خطوتك - المشرف</h1>
+<input type="password" id="adminCode" placeholder="كود المشرف"><br>
+<button onclick="adminLogin()">دخول</button>
+<div id="star-container"></div>
+</div>
+
+<script>
+function adminLogin(){
+  const code = document.getElementById('adminCode').value;
+  if(code==='111111'){window.location.href='admin-dashboard.html';}
+  else {alert('كود غير صحيح');}
+}
+</script>
+</body>
+</html>

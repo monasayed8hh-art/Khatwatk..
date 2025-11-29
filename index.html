@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خطوتك - منصة تعليمية</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1 class="animated-title">خطوتك</h1>
+<input type="text" id="codeInput" placeholder="ادخل الكود"><br>
+<button onclick="login()">دخول</button>
+<p>للتواصل: 01128381838 | <a href="https://chat.whatsapp.com/HBZCFogEwom2l7kVErZvJE?mode=wwt" target="_blank">جروب الواتس</a></p>
+<div id="star-container"></div>
+</div>
+
+<script>
+function login(){
+  const code = document.getElementById('codeInput').value;
+  if(!code){alert('ادخل الكود'); return;}
+  if(code.startsWith('999')){window.location.href='admin.html';}
+  else {localStorage.setItem('currentCode', code); window.location.href='student.html';}
+}
+</script>
+</body>
+</html>

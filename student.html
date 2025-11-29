@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صفحة الطالب</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+<h1 class="animated-title">المواد 📚</h1>
+<div class="materials-grid" id="materialsGrid"></div>
+<button onclick="showProfile()">صفحة شخصية</button>
+<div id="profile" style="display:none; margin-top:20px;"></div>
+<div id="star-container"></div>
+</div>
+
+<script>
+const materials=[
+{name:'عربي', img:'images/arabic.jpg', teachers:['محمد صلاح','رضا الفاروق']},
+{name:'رياضة', img:'images/math.jpg', teachers:['أحمد عصام','لطفي زهران']},
+{name:'فيزياء', img:'images/physics.jpg', teachers:['محمد عبدالمعبود','حسام خليل','كيرلس','محمود مجدي']},
+{name:'كيمياء', img:'images/chemistry.jpg', teachers:['محمد عبدالجواد','خالد صقر','عبدالله حبشي','عمرو الصيفي','جون جهب']},
+{name:'أحياء', img:'images/biology.jpg', teachers:['أحمد الجوهري','محمد أيمن','جيو ماجد','سامح أحمد','أحمد رضوان']},
+{name:'إنجليزي', img:'images/english.jpg', teachers:['ميس مي مجدي','إنجلشاوي','عبدالحميد حامد','شريف المصري','وائل ميلاد','عبقري اللغة']}
+];
+function showMaterials(){
+  const grid=document.getElementById('materialsGrid');
+  materials.forEach(mat=>{
+    const div=document.createElement('div');
+    div.className='material-card';
+    div.innerHTML=`<img src="${mat.img}" alt="${mat.name}" style="width:100%;border-radius:10px;"><h3>${mat.name}</h3>`;
+    div.onclick=()=>alert('مدرسين: '+mat.teachers.join(', '));
+    grid.appendChild(div);
+  });
+}
+showMaterials();
+function showProfile(){
+  const code=localStorage.getItem('currentCode')||'غير محدد';
+  const profile=document.getElementById('profile');
+  profile.innerHTML=`<p>الكود الشخصي: ${code}</p>`;
+  profile.style.display='block';
+}
+</script>
+</body>
+</html>
